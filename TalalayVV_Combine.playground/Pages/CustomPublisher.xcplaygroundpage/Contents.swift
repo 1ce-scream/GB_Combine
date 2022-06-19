@@ -120,4 +120,4 @@ Publishers.customPublisher(count: 10)
  https://betterprogramming.pub/how-to-create-custom-publishers-in-combine-if-you-really-need-them-5bfab31b4ade
  */
 
-//: [Next](@next)
+//: [Homework 2](@next)

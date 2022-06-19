@@ -64,4 +64,4 @@ customSwitch.toggle()
 customSwitch.subject.send(.off)
 
 
-//: [Next](@next)
+//: [CustomPublisher](@next)

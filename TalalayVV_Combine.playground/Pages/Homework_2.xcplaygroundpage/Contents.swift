@@ -100,4 +100,4 @@ example(of: "Third task, option 1") {
     
     print("Custom publisher on next page :)")
 }
-//: [Next](@next)
+//: [Task 3 custom publisher](@next)
