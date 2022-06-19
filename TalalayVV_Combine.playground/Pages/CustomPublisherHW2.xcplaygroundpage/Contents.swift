@@ -87,7 +87,6 @@ let input2 = "9118883344"
 
 let customPublisher = CustomPublisher(inputString: input, contacts: contacts)
 customPublisher
-    .removeDuplicates()
     .sink(receiveCompletion: { print($0) }, receiveValue: { print($0) })
 
 //: [Next](@next)
