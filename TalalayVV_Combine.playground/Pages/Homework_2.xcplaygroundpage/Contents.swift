@@ -110,6 +110,20 @@ example(of: "Third task, option 2") {
         .store(in: &subscriptions)
     
     publisher.send(number)
+}
+
+example(of: "Third task, option 2 short") {
+    let number = "3331233232"
+    let publisher = PassthroughSubject<String,Never>()
+    
+    publisher
+        .compactMap{ input in
+            contacts.first { $0.number.contains(input)}
+        }
+        .sink(receiveCompletion: { print($0) }, receiveValue: { print($0) })
+        .store(in: &subscriptions)
+    
+    publisher.send(number)
     
     print("Custom publisher on next page :)")
 }

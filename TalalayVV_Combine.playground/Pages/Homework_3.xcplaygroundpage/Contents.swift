@@ -21,8 +21,8 @@ private var subscriptions = Set<AnyCancellable>()
  6 Результат выведите в консоль.
 */
 
-example(of: "Homework 3, option 1") {
-    let queue = DispatchQueue(label: "Collect1")
+example(of: "Homework 3") {
+    let queue = DispatchQueue(label: "Collect")
     let subject = PassthroughSubject<String, Never>()
     
     let firstPublisher = subject
@@ -36,16 +36,18 @@ example(of: "Homework 3, option 1") {
             }
             return tmpString
         }
-        .compactMap{ Unicode.Scalar($0) }
-        .compactMap{ Character($0) }
+        .map{ $0.unicodeScalars }
+//        .print()
+        .map{ $0.map(Character.init) }
+//        .print()
         .map{ String($0).description }
+//        .sink(receiveCompletion: { print($0) }, receiveValue: { print($0) })
+//        .store(in: &subscriptions)
     
     let secondPublisher = subject
     secondPublisher
-//        .print()
         .measureInterval(using: DispatchQueue.main)
         .map{ $0 > 0.9 ? "😎" : ""}
-//        .merge(with: firstPublisher)
         .zip(firstPublisher)
         .sink(receiveCompletion: { print($0) }, receiveValue: { print($0) })
         .store(in: &subscriptions)
@@ -67,6 +69,10 @@ example(of: "Homework 3, option 1") {
     }
     DispatchQueue.main.asyncAfter(deadline: .now() + 3.2) {
         subject.send("H")
+        
+    }
+    DispatchQueue.main.asyncAfter(deadline: .now() + 4.0) {
+        subject.send("Hello! This is first string!")
         subject.send(completion: .finished)
     }
 }
