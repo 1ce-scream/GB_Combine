@@ -11,6 +11,20 @@ public func example(of description: String, action: () -> Void) {
 // Subscriptions property.
 private var subscriptions = Set<AnyCancellable>()
 
+// Contacts 
+struct Contact {
+    let name: String
+    let number: String
+}
+
+let contacts: [Contact] = [
+    Contact(name: "Steve", number: "9992341213"),
+    Contact(name: "Matt", number: "9612341213"),
+    Contact(name: "Jodie", number: "3331233232"),
+    Contact(name: "John", number: "8881112233"),
+    Contact(name: "Boris", number: "9118883344")
+]
+
 /* 1. Создайте пример, который публикует коллекцию чисел от 1 до 100, и используйте
  операторы фильтрации, чтобы выполнить следующие действия:
     a. Пропустите первые 50 значений, выданных вышестоящим издателем.
@@ -59,37 +73,12 @@ example(of: "Second task") {
     b. Ищет этот номер в структуре данных контактов.
  */
 
-
 example(of: "Third task, option 1") {
-    struct Contact {
-        let name: String
-        let number: String
-    }
-
-    let contacts: [Contact] = [
-        Contact(name: "Steve", number: "9992341213"),
-        Contact(name: "Matt", number: "9612341213"),
-        Contact(name: "Jodie", number: "3331233232"),
-        Contact(name: "John", number: "8881112233"),
-        Contact(name: "Boris", number: "9118883344")
-    ]
-    
     let name = "Boris"
     let number = "3331233232"
     
     contacts.publisher
         .compactMap{
-            
-            // First option
-//            if $0.name.lowercased().contains(name.lowercased()) {
-//                return $0.number
-//            } else if $0.number.contains(number) {
-//                return $0.name
-//            } else {
-//                return nil
-//            }
-            
-           // Second option
             if $0.name.lowercased().contains(name.lowercased()) || $0.number.contains(number) {
                 return $0
             } else {
@@ -97,6 +86,30 @@ example(of: "Third task, option 1") {
             }
         }
         .sink(receiveCompletion: { print($0)}, receiveValue: { print($0) })
+}
+
+example(of: "Third task, option 2") {
+    let number = "3331233232"
+    let publisher = PassthroughSubject<String,Never>()
+    
+    publisher
+        .map{ input in
+            var output: Contact?
+            for contact in contacts {
+                if contact.number.contains(input) {
+                    output = contact
+                    break
+                } else {
+                    output = nil
+                }
+            }
+            return output
+        }
+        .compactMap{ $0 }
+        .sink(receiveCompletion: { print($0) }, receiveValue: { print($0) })
+        .store(in: &subscriptions)
+    
+    publisher.send(number)
     
     print("Custom publisher on next page :)")
 }

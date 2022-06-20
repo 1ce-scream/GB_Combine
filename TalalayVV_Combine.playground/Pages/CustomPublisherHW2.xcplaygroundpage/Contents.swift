@@ -89,4 +89,4 @@ let customPublisher = CustomPublisher(inputString: input, contacts: contacts)
 customPublisher
     .sink(receiveCompletion: { print($0) }, receiveValue: { print($0) })
 
-//: [Next](@next)
+//: [Homework 3](@next)
