@@ -121,35 +121,35 @@ struct APIClientRM {
             .receive(on: queue)
             .map(\.data)
             .decode(type: Character.self, decoder: decoder)
-            .mapError{ (error) -> Error in
+            .mapError{ (error) -> APIError in
                 switch error {
                 case is URLError:
-                    return Error.unreachableAddress(url: EndPoint.character(id).url)
+                    return APIError.unreachableAddress(url: EndPoint.character(id).url)
                 default:
-                    return Error.invalidResponse
+                    return APIError.invalidResponse
                 }
             }
             .eraseToAnyPublisher()
     }
     
-    func fetchEpisode(id: Int) -> AnyPublisher<Episode, Error> {
+    func fetchEpisode(id: Int) -> AnyPublisher<Episode, APIError> {
         return URLSession.shared
             .dataTaskPublisher(for: EndPoint.episode(id).url)
             .receive(on: queue)
             .map{ $0.data }
             .decode(type: Episode.self, decoder: decoder)
-            .mapError({ error -> Error in
+            .mapError({ error -> APIError in
                 switch error {
                 case is URLError:
-                    return Error.unreachableAddress(url: EndPoint.episode(id).url)
+                    return APIError.unreachableAddress(url: EndPoint.episode(id).url)
                 default:
-                    return Error.invalidResponse
+                    return APIError.invalidResponse
                 }
             })
             .eraseToAnyPublisher()
     }
     
-    func fetchSeveralEpisodes(ids: [Int]) -> AnyPublisher<Episode, Error> {
+    func fetchSeveralEpisodes(ids: [Int]) -> AnyPublisher<Episode, APIError> {
         precondition(!ids.isEmpty)
         
         let initialPublisher = fetchEpisode(id: ids[0])
@@ -184,7 +184,7 @@ extension APIClientRM {
     }
     
     // Error types
-    enum Error: LocalizedError {
+    enum APIError: Error, LocalizedError {
         case unreachableAddress(url: URL)
         case invalidResponse
         
@@ -206,8 +206,16 @@ apiClient.fetchCharacter(id: 10)
     .print("Character publisher", to: TimeLogger())
     .sink(receiveCompletion: { print($0) }, receiveValue: { print($0) })
     .store(in: &cancellables)
+
 apiClient.fetchEpisode(id: 8)
     .print("Episode publisher", to: TimeLogger())
+    .handleEvents(
+        receiveCompletion: { completion in
+            if case .failure(let error) = completion {
+                print(error.localizedDescription)
+            }
+        }
+    )
     .sink(receiveCompletion: { print($0) }, receiveValue: { print($0) })
     .store(in: &cancellables)
 
@@ -215,10 +223,18 @@ apiClient.fetchSeveralEpisodes(ids: [1,10,50,60])
     .handleEvents(
         receiveSubscription: { print("Subs: \($0)") },
         receiveOutput: { print("Output: \($0)") },
-        receiveCompletion: { print("Completion: \($0)") },
         receiveCancel: { print("Subs was canceled") },
         receiveRequest: { print("Subs demand: \($0)") })
-    .sink(receiveCompletion: { print($0) }, receiveValue: { print($0) })
+    .sink(
+        receiveCompletion: { completion in
+            if case .failure(let error) = completion {
+                print(error.localizedDescription)
+            } else {
+                print(completion)
+            }
+        },
+        receiveValue: { print($0) }
+    )
     .store(in: &cancellables)
 
 //: [Next](@next)
