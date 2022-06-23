@@ -88,6 +88,8 @@ class TimeLogger: TextOutputStream {
 
 // MARK: - API Client
 class APIClient {
+    typealias asteroids = (key: String, value: [NearEarthObject])
+    
     private let decoder = JSONDecoder()
     private let queue = DispatchQueue(label: "APIClient",
                                       qos: .default,
@@ -138,18 +140,21 @@ class APIClient {
     }
     
     func fetchSkyInfo(startDate: String,
-                     endDate: String) -> AnyPublisher<(APOD,asteroids),APIError> {
+                      endDate: String) -> AnyPublisher<(APOD,asteroids),APIError> {
         let initialPublisher = fetchAPOD(startDate: startDate, endDate: endDate)
             .flatMap{ $0.publisher }
         
         return initialPublisher
-            .zip(testConvert3(startDate: startDate, endDate: endDate))
+            .zip(
+                fetchNEO(startDate: startDate, endDate: endDate)
+                    .flatMap { value in
+                        value.nearEarthObjects.sorted{ $0.key < $1.key }.publisher
+                    }
+            )
             .eraseToAnyPublisher()
     }
     
     // MARK: - Methods for test
-    
-    typealias asteroids = (key: String, value: [NearEarthObject])
     
     func testConvert(startDate: String,
                      endDate: String) -> AnyPublisher<APOD, APIError> {
