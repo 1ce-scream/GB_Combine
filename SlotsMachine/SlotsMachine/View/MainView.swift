@@ -18,7 +18,7 @@ enum Icon: String {
 }
 
 struct MainView: View {
-    private let NASAViewModel = NASAVM()
+    private let SkyInfoViewModel = SkyInfoVM()
     private let SlotsMachineViewModel = SlotsMachineVM()
     
     @State private var selectedTab: Tabs = .SkyInfo
@@ -26,7 +26,7 @@ struct MainView: View {
     var body: some View {
         TabView(selection: $selectedTab) {
             NavigationView {
-                SkyInfo(viewModel: NASAViewModel)
+                SkyInfoView(viewModel: SkyInfoViewModel)
             }
             .tabItem {
                 Label(Tabs.SkyInfo.rawValue,
@@ -35,7 +35,7 @@ struct MainView: View {
             .tag(Tabs.SkyInfo)
             
             NavigationView {
-                SlotsMachine()
+                SlotsMachine(viewModel: SlotsMachineViewModel)
             }
             .tabItem {
                 Label(Tabs.SlotsMachine.rawValue,
@@ -45,6 +45,8 @@ struct MainView: View {
         }
         .navigationTitle(selectedTab.rawValue)
         .navigationBarBackButtonHidden(true)
+        // fix constraints errors
+        .navigationViewStyle(StackNavigationViewStyle())
     }
 }
 

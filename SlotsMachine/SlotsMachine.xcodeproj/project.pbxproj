@@ -12,15 +12,17 @@
 		FE2BEB892865DB80007E9CA0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FE2BEB882865DB80007E9CA0 /* Assets.xcassets */; };
 		FE2BEB8C2865DB80007E9CA0 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FE2BEB8B2865DB80007E9CA0 /* Preview Assets.xcassets */; };
 		FE2BEB932865DBAF007E9CA0 /* SlotsMachineVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE2BEB922865DBAF007E9CA0 /* SlotsMachineVM.swift */; };
-		FE2BEB952865DBCC007E9CA0 /* NASAVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE2BEB942865DBCC007E9CA0 /* NASAVM.swift */; };
+		FE2BEB952865DBCC007E9CA0 /* SkyInfoVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE2BEB942865DBCC007E9CA0 /* SkyInfoVM.swift */; };
 		FE2BEB9B2865DC50007E9CA0 /* NEOModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE2BEB9A2865DC50007E9CA0 /* NEOModels.swift */; };
 		FE2BEB9D2865DD59007E9CA0 /* APODModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE2BEB9C2865DD59007E9CA0 /* APODModel.swift */; };
 		FE2BEBA02865DE48007E9CA0 /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE2BEB9F2865DE48007E9CA0 /* NetworkService.swift */; };
 		FE2BEBA22865DEA5007E9CA0 /* TimeLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE2BEBA12865DEA5007E9CA0 /* TimeLogger.swift */; };
 		FE2BEBA42865DF2D007E9CA0 /* SlotsMachine.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE2BEBA32865DF2D007E9CA0 /* SlotsMachine.swift */; };
-		FE2BEBA62865E73A007E9CA0 /* SkyInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE2BEBA52865E73A007E9CA0 /* SkyInfo.swift */; };
+		FE2BEBA62865E73A007E9CA0 /* SkyInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE2BEBA52865E73A007E9CA0 /* SkyInfoView.swift */; };
 		FE2BEBA82865F0E2007E9CA0 /* SkyInfoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE2BEBA72865F0E2007E9CA0 /* SkyInfoCell.swift */; };
 		FE2BEBAB2865F10D007E9CA0 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = FE2BEBAA2865F10D007E9CA0 /* Kingfisher */; };
+		FE52209B2867120C00D02205 /* DetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE52209A2867120C00D02205 /* DetailView.swift */; };
+		FEB6C48C2866615200481825 /* SkyInfoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEB6C48B2866615200481825 /* SkyInfoModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,14 +32,16 @@
 		FE2BEB882865DB80007E9CA0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		FE2BEB8B2865DB80007E9CA0 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		FE2BEB922865DBAF007E9CA0 /* SlotsMachineVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SlotsMachineVM.swift; sourceTree = "<group>"; };
-		FE2BEB942865DBCC007E9CA0 /* NASAVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NASAVM.swift; sourceTree = "<group>"; };
+		FE2BEB942865DBCC007E9CA0 /* SkyInfoVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SkyInfoVM.swift; sourceTree = "<group>"; };
 		FE2BEB9A2865DC50007E9CA0 /* NEOModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NEOModels.swift; sourceTree = "<group>"; };
 		FE2BEB9C2865DD59007E9CA0 /* APODModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APODModel.swift; sourceTree = "<group>"; };
 		FE2BEB9F2865DE48007E9CA0 /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
 		FE2BEBA12865DEA5007E9CA0 /* TimeLogger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeLogger.swift; sourceTree = "<group>"; };
 		FE2BEBA32865DF2D007E9CA0 /* SlotsMachine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SlotsMachine.swift; sourceTree = "<group>"; };
-		FE2BEBA52865E73A007E9CA0 /* SkyInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SkyInfo.swift; sourceTree = "<group>"; };
+		FE2BEBA52865E73A007E9CA0 /* SkyInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SkyInfoView.swift; sourceTree = "<group>"; };
 		FE2BEBA72865F0E2007E9CA0 /* SkyInfoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SkyInfoCell.swift; sourceTree = "<group>"; };
+		FE52209A2867120C00D02205 /* DetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailView.swift; sourceTree = "<group>"; };
+		FEB6C48B2866615200481825 /* SkyInfoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SkyInfoModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -93,7 +97,7 @@
 		FE2BEB962865DBF5007E9CA0 /* View Model */ = {
 			isa = PBXGroup;
 			children = (
-				FE2BEB942865DBCC007E9CA0 /* NASAVM.swift */,
+				FE2BEB942865DBCC007E9CA0 /* SkyInfoVM.swift */,
 				FE2BEB922865DBAF007E9CA0 /* SlotsMachineVM.swift */,
 			);
 			path = "View Model";
@@ -104,6 +108,7 @@
 			children = (
 				FE2BEB9A2865DC50007E9CA0 /* NEOModels.swift */,
 				FE2BEB9C2865DD59007E9CA0 /* APODModel.swift */,
+				FEB6C48B2866615200481825 /* SkyInfoModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -113,9 +118,8 @@
 			children = (
 				FE2BEB842865DB7F007E9CA0 /* MainApp.swift */,
 				FE2BEB862865DB7F007E9CA0 /* MainView.swift */,
-				FE2BEBA52865E73A007E9CA0 /* SkyInfo.swift */,
-				FE2BEBA72865F0E2007E9CA0 /* SkyInfoCell.swift */,
 				FE2BEBA32865DF2D007E9CA0 /* SlotsMachine.swift */,
+				FE52209C286713E700D02205 /* SkyInfo */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -126,6 +130,16 @@
 				FE2BEB9F2865DE48007E9CA0 /* NetworkService.swift */,
 			);
 			path = Services;
+			sourceTree = "<group>";
+		};
+		FE52209C286713E700D02205 /* SkyInfo */ = {
+			isa = PBXGroup;
+			children = (
+				FE2BEBA52865E73A007E9CA0 /* SkyInfoView.swift */,
+				FE52209A2867120C00D02205 /* DetailView.swift */,
+				FE2BEBA72865F0E2007E9CA0 /* SkyInfoCell.swift */,
+			);
+			path = SkyInfo;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -205,14 +219,16 @@
 			buildActionMask = 2147483647;
 			files = (
 				FE2BEB872865DB7F007E9CA0 /* MainView.swift in Sources */,
+				FEB6C48C2866615200481825 /* SkyInfoModel.swift in Sources */,
 				FE2BEB9D2865DD59007E9CA0 /* APODModel.swift in Sources */,
 				FE2BEBA22865DEA5007E9CA0 /* TimeLogger.swift in Sources */,
 				FE2BEBA82865F0E2007E9CA0 /* SkyInfoCell.swift in Sources */,
 				FE2BEB9B2865DC50007E9CA0 /* NEOModels.swift in Sources */,
 				FE2BEBA42865DF2D007E9CA0 /* SlotsMachine.swift in Sources */,
-				FE2BEB952865DBCC007E9CA0 /* NASAVM.swift in Sources */,
+				FE52209B2867120C00D02205 /* DetailView.swift in Sources */,
+				FE2BEB952865DBCC007E9CA0 /* SkyInfoVM.swift in Sources */,
 				FE2BEB852865DB7F007E9CA0 /* MainApp.swift in Sources */,
-				FE2BEBA62865E73A007E9CA0 /* SkyInfo.swift in Sources */,
+				FE2BEBA62865E73A007E9CA0 /* SkyInfoView.swift in Sources */,
 				FE2BEB932865DBAF007E9CA0 /* SlotsMachineVM.swift in Sources */,
 				FE2BEBA02865DE48007E9CA0 /* NetworkService.swift in Sources */,
 			);

@@ -1,5 +1,5 @@
 //
-//  SkyInfo.swift
+//  SkyInfoView.swift
 //  SlotsMachine
 //
 //  Created by Vitaliy Talalay on 24.06.2022.
@@ -7,12 +7,15 @@
 
 import SwiftUI
 
-struct SkyInfo: View {
-    @ObservedObject private var viewModel: NASAVM
+struct SkyInfoView: View {
+    @ObservedObject private var viewModel: SkyInfoVM
     @State private var startDate = ""
     @State private var endDate = ""
+    @State private var isPresented = false
     
-    init(viewModel: NASAVM) {
+    private let cornerRadius: CGFloat = 15
+    
+    init(viewModel: SkyInfoVM) {
         self.viewModel = viewModel
     }
     
@@ -20,13 +23,21 @@ struct SkyInfo: View {
         GeometryReader { geometry in
             ZStack(alignment: .bottom) {
                 
-                List(viewModel.APODs) { apods in
-                    SkyInfoCell(apod: apods)
+                List(viewModel.skyInfoModels) { info in
+                    SkyInfoCell(skyInfo: info)
+                        .onTapGesture {
+                            print("cell tapped")
+                            isPresented = true
+                        }
+                        .sheet(isPresented: $isPresented, onDismiss: {
+                            isPresented = false
+                        }) {
+                            DetailView(detailData: info.neos)
+                        }
                 }
                 .navigationTitle("\(Tabs.SkyInfo.rawValue)")
                 .onAppear{
 //                    viewModel.fetchSkyInfo()
-                    UITableView.appearance().backgroundColor = .clear
                 }
                 
                 VStack(alignment: .center, spacing: 0) {
@@ -37,29 +48,29 @@ struct SkyInfo: View {
                         Spacer()
                         TextField("Start date", text: $startDate)
                             .textFieldStyle(.roundedBorder)
-                            .cornerRadius(15)
+                            .cornerRadius(cornerRadius)
                         TextField("End date", text: $endDate)
                             .textFieldStyle(.roundedBorder)
-                            .cornerRadius(15)
+                            .cornerRadius(cornerRadius)
                         Spacer()
                     }
                     .padding(.top, 10)
-                    
+
                     Button("Get sky info") {
                         print("tapped")
+                        guard !startDate.isEmpty && !endDate.isEmpty else {return}
                         self.viewModel.fetchSkyInfo(startDate: startDate,
                                                     endDate: endDate)
                     }
                     .buttonStyle(.bordered)
                     .background(.green)
                     .foregroundColor(.white)
-                    .cornerRadius(20)
-                    .padding()
+                    .cornerRadius(cornerRadius)
+                    .padding([.top, .bottom], 10)
                 }
                 .background(.blue.opacity(0.8))
-                .cornerRadius(20)
-                .padding(.bottom, 10)
-                .frame(width: geometry.size.width - 10)
+                .cornerRadius(cornerRadius)
+                .frame(width: geometry.size.width * 0.95)
             }
         }
     }
@@ -67,7 +78,7 @@ struct SkyInfo: View {
 
 struct SkyInfo_Previews: PreviewProvider {
     static var previews: some View {
-        SkyInfo(viewModel: NASAVM() )
+        SkyInfoView(viewModel: SkyInfoVM() )
             .previewDisplayName("SkyInfo")
             .previewDevice("iPhone 13 mini")
     }
