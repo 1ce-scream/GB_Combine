@@ -24,16 +24,18 @@ struct SkyInfoView: View {
             ZStack(alignment: .bottom) {
                 
                 List(viewModel.skyInfoModels) { info in
-                    SkyInfoCell(skyInfo: info)
-                        .onTapGesture {
-                            print("cell tapped")
-                            isPresented = true
+                    VStack {
+                        NavigationLink(destination: DetailView(detailData: info.neos,
+                                                               date: info.apod.date)) {
+                            VStack {
+                                Text("Date: \(info.apod.date)")
+                                    .font(.body)
+                                Text("Tap to show Asteroinds info at this day")
+                                    .font(.subheadline)
+                            }
                         }
-                        .sheet(isPresented: $isPresented, onDismiss: {
-                            isPresented = false
-                        }) {
-                            DetailView(detailData: info.neos)
-                        }
+                        SkyInfoCell(skyInfo: info)
+                    }
                 }
 //                .onReceive(viewModel.timer, perform: { _ in
 //                    viewModel.fetchSkyInfo(startDate: startDate, endDate: endDate)
