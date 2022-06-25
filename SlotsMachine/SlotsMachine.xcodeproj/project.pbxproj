@@ -16,7 +16,6 @@
 		FE2BEB9B2865DC50007E9CA0 /* NEOModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE2BEB9A2865DC50007E9CA0 /* NEOModels.swift */; };
 		FE2BEB9D2865DD59007E9CA0 /* APODModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE2BEB9C2865DD59007E9CA0 /* APODModel.swift */; };
 		FE2BEBA02865DE48007E9CA0 /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE2BEB9F2865DE48007E9CA0 /* NetworkService.swift */; };
-		FE2BEBA22865DEA5007E9CA0 /* TimeLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE2BEBA12865DEA5007E9CA0 /* TimeLogger.swift */; };
 		FE2BEBA42865DF2D007E9CA0 /* SlotsMachine.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE2BEBA32865DF2D007E9CA0 /* SlotsMachine.swift */; };
 		FE2BEBA62865E73A007E9CA0 /* SkyInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE2BEBA52865E73A007E9CA0 /* SkyInfoView.swift */; };
 		FE2BEBA82865F0E2007E9CA0 /* SkyInfoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE2BEBA72865F0E2007E9CA0 /* SkyInfoCell.swift */; };
@@ -36,7 +35,6 @@
 		FE2BEB9A2865DC50007E9CA0 /* NEOModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NEOModels.swift; sourceTree = "<group>"; };
 		FE2BEB9C2865DD59007E9CA0 /* APODModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APODModel.swift; sourceTree = "<group>"; };
 		FE2BEB9F2865DE48007E9CA0 /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
-		FE2BEBA12865DEA5007E9CA0 /* TimeLogger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeLogger.swift; sourceTree = "<group>"; };
 		FE2BEBA32865DF2D007E9CA0 /* SlotsMachine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SlotsMachine.swift; sourceTree = "<group>"; };
 		FE2BEBA52865E73A007E9CA0 /* SkyInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SkyInfoView.swift; sourceTree = "<group>"; };
 		FE2BEBA72865F0E2007E9CA0 /* SkyInfoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SkyInfoCell.swift; sourceTree = "<group>"; };
@@ -79,7 +77,6 @@
 				FE2BEB992865DC1E007E9CA0 /* View */,
 				FE2BEB962865DBF5007E9CA0 /* View Model */,
 				FE2BEB9E2865DE32007E9CA0 /* Services */,
-				FE2BEBA12865DEA5007E9CA0 /* TimeLogger.swift */,
 				FE2BEB882865DB80007E9CA0 /* Assets.xcassets */,
 				FE2BEB8A2865DB80007E9CA0 /* Preview Content */,
 			);
@@ -221,7 +218,6 @@
 				FE2BEB872865DB7F007E9CA0 /* MainView.swift in Sources */,
 				FEB6C48C2866615200481825 /* SkyInfoModel.swift in Sources */,
 				FE2BEB9D2865DD59007E9CA0 /* APODModel.swift in Sources */,
-				FE2BEBA22865DEA5007E9CA0 /* TimeLogger.swift in Sources */,
 				FE2BEBA82865F0E2007E9CA0 /* SkyInfoCell.swift in Sources */,
 				FE2BEB9B2865DC50007E9CA0 /* NEOModels.swift in Sources */,
 				FE2BEBA42865DF2D007E9CA0 /* SlotsMachine.swift in Sources */,

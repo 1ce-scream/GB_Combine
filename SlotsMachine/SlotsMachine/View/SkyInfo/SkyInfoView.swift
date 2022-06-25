@@ -35,10 +35,10 @@ struct SkyInfoView: View {
                             DetailView(detailData: info.neos)
                         }
                 }
+//                .onReceive(viewModel.timer, perform: { _ in
+//                    viewModel.fetchSkyInfo(startDate: startDate, endDate: endDate)
+//                })
                 .navigationTitle("\(Tabs.SkyInfo.rawValue)")
-                .onAppear{
-//                    viewModel.fetchSkyInfo()
-                }
                 
                 VStack(alignment: .center, spacing: 0) {
                     Text("Date format YYYY-MM-DD")

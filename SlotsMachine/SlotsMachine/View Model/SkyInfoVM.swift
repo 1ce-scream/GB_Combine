@@ -16,10 +16,11 @@ final class SkyInfoVM: ObservableObject {
     private var cancellables = Set<AnyCancellable>()
     private lazy var networkService = NetworkService()
     
+//    let timer = Timer.publish(every: 10, on: .main, in: .common).autoconnect()
+    
     func fetchSkyInfo(startDate: String, endDate: String) {
         skyInfoModels.removeAll()
         networkService.fetchSkyInfo(startDate: startDate, endDate: endDate)
-//            .debounce(for: .seconds(2.0), scheduler: DispatchQueue.main)
             .receive(on: DispatchQueue.main)
             .sink(
                 receiveCompletion: { [weak self] value in
