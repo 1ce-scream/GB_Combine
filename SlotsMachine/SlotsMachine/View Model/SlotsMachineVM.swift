@@ -9,46 +9,51 @@ import SwiftUI
 import Combine
 
 final class SlotsMachineVM: ObservableObject {
-    @Published var run: Bool = false
-    @Published var startGame = false
+    @Published var isGameStarted: Bool = false
     @Published var firstSlot: String = "🤖"
     @Published var secondSlot: String = "🤖"
     @Published var thirdSlot: String = "🤖"
     @Published var textTitle = ""
     @Published var buttonText = ""
+    /*
+    Remember that it is best to avoid accessing fields and methods from operators.
+     It is better to pass all necessary values through publishers.
+     */
+    @Published var justForRemember: Bool = false
     
+    private let runLoop = RunLoop.main
     private var cancellables = Set<AnyCancellable>()
+    // TODO: Привязать изменение слотов к таймеру через share или multicast
     private var timer = Timer.publish(every: 0.1, on: .main, in: .common).autoconnect()
     
     private let arrayEmoji = ["🤪", "😎", "😜", "🥶", "😷", "🤯"]
      
     init() {
         timer
-            .receive(on: RunLoop.main)
+            .receive(on: runLoop)
             .sink { _ in self.random() }
             .store(in: &cancellables)
         
-        $run
-            .receive(on: RunLoop.main)
+        $isGameStarted
+            .receive(on: runLoop)
+            .combineLatest($justForRemember)
             .map {
-                guard !$0 && self.startGame else { return "Let's play!" }
+                guard !$0 && $1 else { return "Let's play!" }
                 return (
                     self.firstSlot == self.secondSlot
                     && self.firstSlot == self.thirdSlot ? "You won!" : "You lose!"
                 )
             }
-            .assign(to: \.textTitle, on: self)
-            .store(in: &cancellables)
+            .assign(to: &$textTitle)
         
-        $run
-            .receive(on: RunLoop.main)
+        $isGameStarted
+            .receive(on: runLoop)
             .map { $0 == true ? "Catch it!" : "Start" }
-            .assign(to: \.buttonText, on: self)
-            .store(in: &cancellables)
+            .assign(to: &$buttonText)
     }
     
     private func random() {
-        guard run else { return }
+        guard isGameStarted else { return }
         firstSlot = arrayEmoji.randomElement() ?? ""
         secondSlot = arrayEmoji.randomElement() ?? ""
         thirdSlot = arrayEmoji.randomElement() ?? ""

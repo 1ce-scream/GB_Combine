@@ -37,8 +37,8 @@ struct SlotsMachine: View {
                 
                 Button(viewModel.buttonText) {
                     print("tapped")
-                    viewModel.run.toggle()
-                    viewModel.startGame = true
+                    viewModel.isGameStarted.toggle()
+                    viewModel.justForRemember = true
                 }
                 .foregroundColor(.white)
                 .font(.system(size: 60))

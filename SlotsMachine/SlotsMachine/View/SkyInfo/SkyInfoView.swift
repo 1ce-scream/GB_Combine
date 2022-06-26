@@ -23,6 +23,8 @@ struct SkyInfoView: View {
         GeometryReader { geometry in
             ZStack(alignment: .bottom) {
                 
+                // TODO: сопоставить положение последнего элемента с размерами координатами списка
+                // https://swiftwithmajid.com/2020/01/15/the-magic-of-view-preferences-in-swiftui/
                 List(viewModel.skyInfoModels) { info in
                     VStack {
                         NavigationLink(destination: DetailView(detailData: info.neos,
