@@ -110,7 +110,9 @@ class APIClient {
             .receive(on: queue)
             .map{ $0.data }
             .decode(type: NeoResponse.self, decoder: decoder)
-            .mapError{ error -> APIError in return APIError.decodingError}
+            .mapError{ error -> APIError in
+                return error as? APIError ?? .decodingError
+            }
             .eraseToAnyPublisher()
     }
     
@@ -208,76 +210,116 @@ apiClient.fetchSkyInfo(startDate: startDate, endDate: endDate)
     .store(in: &cancellables)
 
 
-//3. Реализовать буферизируемый оператор sink.
+//2. *Создать пользовательский издатель «трансформатор» по примеру «производителя»
 
-protocol Pausable {
-    var paused: Bool {get}
-    func resume()
+extension Publisher {
+    func unwrap<T>() -> Publishers.CompactMap<Self, T> where Output == Optional<T> {
+        compactMap { $0 }
+    }
+    
+    // first option
+    func evenSquared() -> AnyPublisher<Output, Failure> where Output == Int {
+        return filter {
+            $0 % 2 == 0
+        }.map {
+            $0 * $0
+        }.eraseToAnyPublisher()
+    }
+    
+    // second option
+    func isEven() -> AnyPublisher<Bool, Failure> where Output == Int {
+        return map {
+            $0 % 2 == 0
+        }.eraseToAnyPublisher()
+    }
 }
 
-final class PausableSubscriber<Input, Failure: Error>: Subscriber, Pausable, Cancellable {
-    let receiveValue: (Input) -> Bool
-    let receiveCompletion: (Subscribers.Completion<Failure>) -> Void
-    private var subscription: Subscription? = nil
-    var paused = false
+let subA: () = [1,2,3,4,5,6,7,8,9].publisher
+    .evenSquared()
+    .sink(receiveValue: { print($0) } )
+    .store(in: &cancellables)
 
-    init(receiveValue: @escaping (Input) -> Bool,
-         receiveCompletion: @escaping (Subscribers.Completion<Failure>) -> Void) {
-    self.receiveValue = receiveValue
-    self.receiveCompletion = receiveCompletion }
+let subB: () = [1,2,3,4,5,6,7,8,9].publisher
+    .isEven()
+    .sink(receiveValue: { print($0) } )
+    .store(in: &cancellables)
+
+
+//3. *Реализовать буферизируемый оператор sink.
+
+final class BufferedSubscriber<Input, Failure: Error>: Subscriber {
+    let receiveCompletion: (Subscribers.Completion<Failure>) -> Void
+    let receiveValue: ([Input]) -> Input
+    let capacity: Int
     
-    func cancel() { subscription?.cancel()
-        subscription = nil
+    var buffer: [Input] = []
+    
+    init(capacity: Int,
+         receiveCompletion: @escaping (Subscribers.Completion<Failure>) -> Void,
+         receiveValue: @escaping (([Input]) -> Input)
+    ) {
+        self.capacity = capacity
+        self.receiveCompletion = receiveCompletion
+        self.receiveValue = receiveValue
     }
     
-    
+    //указывает количество значений, которые может получить наш подписчик
     func receive(subscription: Subscription) {
-        self.subscription = subscription
         subscription.request(.max(1))
     }
+    
+    //обрабатывает полученный ввод и расширяет количество значений, которые может получить подписчик.
     func receive(_ input: Input) -> Subscribers.Demand {
-        paused = receiveValue(input) == false
-        return paused ? .none : .max(1)
+        buffer.append(input)
+        if buffer.count > capacity {
+            buffer.removeFirst()
+//            buffer.removeAll()
+        }
+        if buffer.count == capacity {
+            receiveValue(buffer)
+        }
+//        if buffer.count == capacity {
+//            buffer.forEach { value in
+//                receiveValue(value)
+//            }
+//        }
+        
+//        return .max(capacity)
+        return .unlimited
     }
     
+    //который обрабатывает событие завершения
     func receive(completion: Subscribers.Completion<Failure>) {
         receiveCompletion(completion)
-        subscription = nil
-    }
-    
-    func resume() {
-        guard paused else { return }
-        paused = false
-        subscription?.request(.max(1))
+        self.buffer.removeAll()
     }
 }
 
 extension Publisher {
-    func pausableSink(receiveCompletion: @escaping ((Subscribers.Completion<Failure>) -> Void),
-                      receiveValue: @escaping ((Output) -> Bool)) -> Pausable & Cancellable {
-        let pausable = PausableSubscriber( receiveValue: receiveValue, receiveCompletion: receiveCompletion )
-        self.subscribe(pausable)
-        return pausable
+    func bufferedSink(capacity: Int,
+                      receiveCompletion: @escaping ((Subscribers.Completion<Failure>) -> Void),
+                      receiveValue: @escaping (([Output]) -> Output)) {
+        let buffered = BufferedSubscriber(capacity: capacity,
+                                          receiveCompletion: receiveCompletion,
+                                          receiveValue: receiveValue)
+        self.subscribe(buffered)
     }
 }
 
-
-let subscription = [1, 2, 3, 4, 5, 6, 6,7,89,768,678678,6464563534].publisher
-    .buffer(size: 10, prefetch: .keepFull, whenFull: .dropNewest)
-    .pausableSink(
+let subscription: () = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12].publisher
+    .bufferedSink(
+        capacity: 6,
         receiveCompletion: { completion in
-            print("Pausable subscription completed: \(completion)")
+            print("Buffered subscription completed: \(completion)")
         },
-        receiveValue: {
-            value -> Bool in print("Receive value: \(value)")
-            if value  == 89 {
-                print("Pausing")
-                return false
-            }
-            return true
+        receiveValue: { value in
+            print(value)
         }
     )
 
-subscription.resume()
+let subscrition2: () = [1,2,3,4,5,6,7,8,9,10,11,12].publisher
+    .buffer(size: 6, prefetch: .keepFull, whenFull: .dropOldest)
+    .sink(receiveValue: { print($0) } )
+    .store(in: &cancellables)
 
 //: [Next](@next)
