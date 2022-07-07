@@ -12,6 +12,7 @@ final class SkyInfoVM: ObservableObject {
     typealias asteroids = (key: String, value: [NearEarthObject])
 
     @Published var skyInfoModels: [SkyInfoModel] = []
+    @Published var error: NetworkService.APIError? = nil
     
     private var cancellables = Set<AnyCancellable>()
     private lazy var networkService = NetworkService()
@@ -26,8 +27,9 @@ final class SkyInfoVM: ObservableObject {
                 receiveCompletion: { [weak self] value in
                     guard let self = self else { return }
                     switch value {
-                    case .failure:
+                    case .failure(let error):
                         self.skyInfoModels = []
+                        self.error = error
                     case .finished:
                         break
                     }
@@ -35,6 +37,7 @@ final class SkyInfoVM: ObservableObject {
                 receiveValue: { [weak self] apod, asteroid in
                     guard let self = self else { return }
                     self.skyInfoModels.append(SkyInfoModel(apod: apod, neos: asteroid))
+                    self.error = nil
                 }
             )
             .store(in: &cancellables)
