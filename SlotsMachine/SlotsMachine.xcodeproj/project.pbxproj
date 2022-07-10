@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		FE11CCFD287B22980049EDE6 /* SlotsMachineTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE11CCFC287B22980049EDE6 /* SlotsMachineTests.swift */; };
+		FE11CD04287B30B10049EDE6 /* SkyInfoTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE11CD03287B30B10049EDE6 /* SkyInfoTests.swift */; };
 		FE2BEB852865DB7F007E9CA0 /* MainApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE2BEB842865DB7F007E9CA0 /* MainApp.swift */; };
 		FE2BEB872865DB7F007E9CA0 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE2BEB862865DB7F007E9CA0 /* MainView.swift */; };
 		FE2BEB892865DB80007E9CA0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FE2BEB882865DB80007E9CA0 /* Assets.xcassets */; };
@@ -24,7 +26,20 @@
 		FEB6C48C2866615200481825 /* SkyInfoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEB6C48B2866615200481825 /* SkyInfoModel.swift */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		FE11CCFE287B22980049EDE6 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = FE2BEB792865DB7F007E9CA0 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = FE2BEB802865DB7F007E9CA0;
+			remoteInfo = SlotsMachine;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
+		FE11CCFA287B22970049EDE6 /* SlotsMachineTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SlotsMachineTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		FE11CCFC287B22980049EDE6 /* SlotsMachineTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SlotsMachineTests.swift; sourceTree = "<group>"; };
+		FE11CD03287B30B10049EDE6 /* SkyInfoTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SkyInfoTests.swift; sourceTree = "<group>"; };
 		FE2BEB812865DB7F007E9CA0 /* SlotsMachine.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SlotsMachine.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FE2BEB842865DB7F007E9CA0 /* MainApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainApp.swift; sourceTree = "<group>"; };
 		FE2BEB862865DB7F007E9CA0 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
@@ -43,6 +58,13 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		FE11CCF7287B22970049EDE6 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		FE2BEB7E2865DB7F007E9CA0 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -54,10 +76,20 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		FE11CCFB287B22970049EDE6 /* SlotsMachineTests */ = {
+			isa = PBXGroup;
+			children = (
+				FE11CCFC287B22980049EDE6 /* SlotsMachineTests.swift */,
+				FE11CD03287B30B10049EDE6 /* SkyInfoTests.swift */,
+			);
+			path = SlotsMachineTests;
+			sourceTree = "<group>";
+		};
 		FE2BEB782865DB7F007E9CA0 = {
 			isa = PBXGroup;
 			children = (
 				FE2BEB832865DB7F007E9CA0 /* SlotsMachine */,
+				FE11CCFB287B22970049EDE6 /* SlotsMachineTests */,
 				FE2BEB822865DB7F007E9CA0 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -66,6 +98,7 @@
 			isa = PBXGroup;
 			children = (
 				FE2BEB812865DB7F007E9CA0 /* SlotsMachine.app */,
+				FE11CCFA287B22970049EDE6 /* SlotsMachineTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -142,6 +175,24 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		FE11CCF9287B22970049EDE6 /* SlotsMachineTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = FE11CD02287B22980049EDE6 /* Build configuration list for PBXNativeTarget "SlotsMachineTests" */;
+			buildPhases = (
+				FE11CCF6287B22970049EDE6 /* Sources */,
+				FE11CCF7287B22970049EDE6 /* Frameworks */,
+				FE11CCF8287B22970049EDE6 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				FE11CCFF287B22980049EDE6 /* PBXTargetDependency */,
+			);
+			name = SlotsMachineTests;
+			productName = SlotsMachineTests;
+			productReference = FE11CCFA287B22970049EDE6 /* SlotsMachineTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		FE2BEB802865DB7F007E9CA0 /* SlotsMachine */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = FE2BEB8F2865DB80007E9CA0 /* Build configuration list for PBXNativeTarget "SlotsMachine" */;
@@ -172,6 +223,10 @@
 				LastSwiftUpdateCheck = 1340;
 				LastUpgradeCheck = 1340;
 				TargetAttributes = {
+					FE11CCF9287B22970049EDE6 = {
+						CreatedOnToolsVersion = 13.4.1;
+						TestTargetID = FE2BEB802865DB7F007E9CA0;
+					};
 					FE2BEB802865DB7F007E9CA0 = {
 						CreatedOnToolsVersion = 13.4.1;
 					};
@@ -194,11 +249,19 @@
 			projectRoot = "";
 			targets = (
 				FE2BEB802865DB7F007E9CA0 /* SlotsMachine */,
+				FE11CCF9287B22970049EDE6 /* SlotsMachineTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		FE11CCF8287B22970049EDE6 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		FE2BEB7F2865DB7F007E9CA0 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -211,6 +274,15 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		FE11CCF6287B22970049EDE6 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FE11CCFD287B22980049EDE6 /* SlotsMachineTests.swift in Sources */,
+				FE11CD04287B30B10049EDE6 /* SkyInfoTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		FE2BEB7D2865DB7F007E9CA0 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -232,7 +304,51 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXTargetDependency section */
+		FE11CCFF287B22980049EDE6 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = FE2BEB802865DB7F007E9CA0 /* SlotsMachine */;
+			targetProxy = FE11CCFE287B22980049EDE6 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
 /* Begin XCBuildConfiguration section */
+		FE11CD00287B22980049EDE6 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = Q3N89R8Y92;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = haunt.SlotsMachineTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SlotsMachine.app/SlotsMachine";
+			};
+			name = Debug;
+		};
+		FE11CD01287B22980049EDE6 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = Q3N89R8Y92;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = haunt.SlotsMachineTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SlotsMachine.app/SlotsMachine";
+			};
+			name = Release;
+		};
 		FE2BEB8D2865DB80007E9CA0 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -408,6 +524,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		FE11CD02287B22980049EDE6 /* Build configuration list for PBXNativeTarget "SlotsMachineTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				FE11CD00287B22980049EDE6 /* Debug */,
+				FE11CD01287B22980049EDE6 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		FE2BEB7C2865DB7F007E9CA0 /* Build configuration list for PBXProject "SlotsMachine" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
