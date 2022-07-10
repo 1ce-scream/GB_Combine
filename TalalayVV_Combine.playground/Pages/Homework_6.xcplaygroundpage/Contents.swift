@@ -271,20 +271,22 @@ final class BufferedSubscriber<Input, Failure: Error>: Subscriber {
     //обрабатывает полученный ввод и расширяет количество значений, которые может получить подписчик.
     func receive(_ input: Input) -> Subscribers.Demand {
         buffer.append(input)
+        
         if buffer.count > capacity {
             buffer.removeFirst()
-//            buffer.removeAll()
         }
+        
         if buffer.count == capacity {
             receiveValue(buffer)
         }
+        
+        // may be used as an alternative option instead of an array
 //        if buffer.count == capacity {
 //            buffer.forEach { value in
 //                receiveValue(value)
 //            }
 //        }
-        
-//        return .max(capacity)
+    
         return .unlimited
     }
     
@@ -306,7 +308,7 @@ extension Publisher {
     }
 }
 
-let subscription: () = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12].publisher
+let _ = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12].publisher
     .bufferedSink(
         capacity: 6,
         receiveCompletion: { completion in
@@ -317,7 +319,7 @@ let subscription: () = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12].publisher
         }
     )
 
-let subscrition2: () = [1,2,3,4,5,6,7,8,9,10,11,12].publisher
+let _ = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12].publisher
     .buffer(size: 6, prefetch: .keepFull, whenFull: .dropOldest)
     .sink(receiveValue: { print($0) } )
     .store(in: &cancellables)
