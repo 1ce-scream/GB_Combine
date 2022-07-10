@@ -11,7 +11,6 @@ struct SkyInfoView: View {
     @ObservedObject private var viewModel: SkyInfoVM
     @State private var startDate = ""
     @State private var endDate = ""
-    @State private var isPresented = false
     
     private let cornerRadius: CGFloat = 15
     
@@ -23,7 +22,7 @@ struct SkyInfoView: View {
         GeometryReader { geometry in
             ZStack(alignment: .bottom) {
                 
-                // TODO: сопоставить положение последнего элемента с размерами координатами списка
+                // TODO: сопоставить положение последнего элемента с размерами списка
                 // https://swiftwithmajid.com/2020/01/15/the-magic-of-view-preferences-in-swiftui/
                 List(viewModel.skyInfoModels) { info in
                     VStack {
@@ -38,6 +37,9 @@ struct SkyInfoView: View {
                         }
                         SkyInfoCell(skyInfo: info)
                     }
+                }
+                .alert(item: $viewModel.error) { error in
+                    Alert(title: Text("Error"), message: Text(error.errorDescription ?? ""))
                 }
 //                .onReceive(viewModel.timer, perform: { _ in
 //                    viewModel.fetchSkyInfo(startDate: startDate, endDate: endDate)

@@ -31,14 +31,15 @@ final class SlotsMachineVM: ObservableObject {
     init() {
         timer
             .receive(on: runLoop)
-            .sink { _ in self.random() }
+            .sink { [weak self] _  in self?.random() }
             .store(in: &cancellables)
         
         $isGameStarted
             .receive(on: runLoop)
             .combineLatest($justForRemember)
-            .map {
-                guard !$0 && $1 else { return "Let's play!" }
+            .compactMap { [weak self] isRun, remember in
+                guard let self = self else { return nil }
+                guard !isRun && remember else { return "Let's play!" }
                 return (
                     self.firstSlot == self.secondSlot
                     && self.firstSlot == self.thirdSlot ? "You won!" : "You lose!"

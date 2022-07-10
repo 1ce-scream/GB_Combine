@@ -118,7 +118,9 @@ extension NetworkService {
     }
     
     // Error types
-    enum APIError: Error, LocalizedError {
+    enum APIError: LocalizedError, Identifiable {
+        var id: String { localizedDescription }
+        
         case unreachableAddress(url: URL)
         case invalidResponse
         case decodingError
