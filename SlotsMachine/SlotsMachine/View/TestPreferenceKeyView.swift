@@ -45,6 +45,10 @@ struct TestPreferenceKeyView: View {
                 )
                 .onPreferenceChange(CellOffsetPreferenceKey.self) { value in
                     listOffset = value
+                    /*
+                    Logic: the user reached the end of the list only when the cells stop filling
+                     the entire screen
+                     */
                     
                     // Screen fill factor
                     coefficient = value / geo.size.height
