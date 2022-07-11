@@ -22,9 +22,6 @@ struct SkyInfoView: View {
     var body: some View {
         GeometryReader { geometry in
             ZStack(alignment: .bottom) {
-                
-                // TODO: сопоставить положение последнего элемента с размерами списка
-                // https://swiftwithmajid.com/2020/01/15/the-magic-of-view-preferences-in-swiftui/
                 List(viewModel.skyInfoModels) { info in
                     VStack {
                         NavigationLink(destination: DetailView(detailData: info.neos,
@@ -44,7 +41,9 @@ struct SkyInfoView: View {
                     .modifier(CellPreferenceModifier())
                 }
                 .onPreferenceChange(CellOffsetPreferenceKey.self) { value in
+                    // Screen fill factor
                     let coefficient = value / geometry.size.height
+                    
                     if coefficient != 0 && coefficient < 1 && isHidden == true {
                         isHidden.toggle()
                         print("coef \(coefficient)")

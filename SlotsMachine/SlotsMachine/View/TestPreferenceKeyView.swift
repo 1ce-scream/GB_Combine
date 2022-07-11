@@ -12,7 +12,11 @@ struct CellOffsetPreferenceKey: PreferenceKey {
     static var defaultValue: CGFloat = .zero
     
     static func reduce(value: inout CGFloat, nextValue: () -> CGFloat) {
+        // height of all visible cells
         value += nextValue()
+        
+        // height of one cell (in this case. In general depends on transfering value)
+        // may be used in case of geomentry.frame(in: .global).minY
 //        value = nextValue()
     }
 }
@@ -42,6 +46,7 @@ struct TestPreferenceKeyView: View {
                 .onPreferenceChange(CellOffsetPreferenceKey.self) { value in
                     listOffset = value
                     
+                    // Screen fill factor
                     coefficient = value / geo.size.height
                     
                     if coefficient < 1 && isHidden == true {
@@ -87,9 +92,14 @@ struct CellPreferenceModifier: ViewModifier {
                 GeometryReader { geomentry in
                     Color.clear.preference(key: CellOffsetPreferenceKey.self,
                                            value: geomentry.size.height)
+                    
+                    // distance from the bottom/top of the cell
+//                    geomentry.frame(in: .global).minY
                     // maxY is a bottom
                     // minY is a top
-//                    geomentry.frame(in: .global).minY
+                    
+                    // height of one cell
+//                    geometry.size.height
                 }
             )
     }
