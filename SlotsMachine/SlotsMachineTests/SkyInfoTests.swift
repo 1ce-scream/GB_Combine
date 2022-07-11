@@ -26,6 +26,7 @@ class SkyInfoTests: XCTestCase {
         super.tearDown()
     }
     
+    // option 1
     func testFetchSkyInfo() {
         // Given
         let startDate = "2022-06-17"
@@ -50,6 +51,7 @@ class SkyInfoTests: XCTestCase {
 //        XCTAssertEqual(result.count, 3)
     }
     
+    // option 2 (preferred)
     func testFetchSkyInfo2() {
         let startDate = "2022-06-17"
         let endDate = "2022-06-19"
@@ -61,4 +63,6 @@ class SkyInfoTests: XCTestCase {
         XCTWaiter.wait(for: [expectation], timeout: 6)
         XCTAssertTrue(viewModel.skyInfoModels.count > 0)
     }
+    
+    // also, it is better to use a mock stub with prepared data, so as not to depend on the network.
 }

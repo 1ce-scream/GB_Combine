@@ -11,6 +11,7 @@ struct SkyInfoView: View {
     @ObservedObject private var viewModel: SkyInfoVM
     @State private var startDate = ""
     @State private var endDate = ""
+    @State private var isHidden = false
     
     private let cornerRadius: CGFloat = 15
     
@@ -45,40 +46,68 @@ struct SkyInfoView: View {
 //                    viewModel.fetchSkyInfo(startDate: startDate, endDate: endDate)
 //                })
                 .navigationTitle("\(Tabs.SkyInfo.rawValue)")
-                
-                VStack(alignment: .center, spacing: 0) {
-                    Text("Date format YYYY-MM-DD")
-                        .foregroundColor(.white)
-                        .font(.title3)
-                    HStack(alignment: .center, spacing: 8) {
-                        Spacer()
-                        TextField("Start date", text: $startDate)
-                            .textFieldStyle(.roundedBorder)
-                            .cornerRadius(cornerRadius)
-                        TextField("End date", text: $endDate)
-                            .textFieldStyle(.roundedBorder)
-                            .cornerRadius(cornerRadius)
-                        Spacer()
+                .toolbar {
+                    Button("Search") {
+                        print("Search")
+                        isHidden.toggle()
                     }
-                    .padding(.top, 10)
-
-                    Button("Get sky info") {
-                        print("tapped")
-                        guard !startDate.isEmpty && !endDate.isEmpty else {return}
-                        self.viewModel.fetchSkyInfo(startDate: startDate,
-                                                    endDate: endDate)
-                    }
-                    .buttonStyle(.bordered)
-                    .background(.green)
-                    .foregroundColor(.white)
-                    .cornerRadius(cornerRadius)
-                    .padding([.top, .bottom], 10)
                 }
-                .background(.blue.opacity(0.8))
-                .cornerRadius(cornerRadius)
-                .frame(width: geometry.size.width * 0.95)
+                
+                BottomView(startDate: $startDate,
+                           endDate: $endDate,
+                           isHidden: $isHidden,
+                           viewModel: viewModel,
+                           geometry: geometry)
+                .opacity(isHidden ? 0 : 1)
+                .animation(.easeInOut, value: isHidden)
             }
         }
+    }
+}
+
+struct BottomView: View {
+    @Binding var startDate: String
+    @Binding var endDate: String
+    @Binding var isHidden: Bool
+    
+    let viewModel: SkyInfoVM
+    let geometry: GeometryProxy
+    
+    private let cornerRadius: CGFloat = 15
+    
+    var body: some View {
+        VStack(alignment: .center, spacing: 0) {
+            Text("Date format YYYY-MM-DD")
+                .foregroundColor(.white)
+                .font(.title3)
+            HStack(alignment: .center, spacing: 8) {
+                Spacer()
+                TextField("Start date", text: $startDate)
+                    .textFieldStyle(.roundedBorder)
+                    .cornerRadius(cornerRadius)
+                TextField("End date", text: $endDate)
+                    .textFieldStyle(.roundedBorder)
+                    .cornerRadius(cornerRadius)
+                Spacer()
+            }
+            .padding(.top, 10)
+            
+            Button("Get sky info") {
+                print("tapped")
+                guard !startDate.isEmpty && !endDate.isEmpty else {return}
+                self.viewModel.fetchSkyInfo(startDate: startDate,
+                                            endDate: endDate)
+                self.isHidden.toggle()
+            }
+            .buttonStyle(.bordered)
+            .background(.green)
+            .foregroundColor(.white)
+            .cornerRadius(cornerRadius)
+            .padding([.top, .bottom], 10)
+        }
+        .background(.blue.opacity(0.8))
+        .cornerRadius(cornerRadius)
+        .frame(width: geometry.size.width * 0.95)
     }
 }
 

@@ -32,12 +32,14 @@ class SlotsMachineTests: XCTestCase {
         let expected = "Start"
         let expected2 = "Let's play!"
         let expectation = XCTestExpectation()
+        var result = ""
+        var result2 = ""
         
         viewModel
             .$buttonText
             .dropFirst() // дропаем первое значение, заданное при инициализации
             .sink { value in
-                XCTAssertEqual(value, expected)
+                result = value
                 expectation.fulfill()
             }
             .store(in: &cancellables)
@@ -46,7 +48,7 @@ class SlotsMachineTests: XCTestCase {
             .$textTitle
             .dropFirst()
             .sink { value in
-                XCTAssertEqual(value, expected2)
+                result2 = value
                 expectation.fulfill()
             }
             .store(in: &cancellables)
@@ -56,18 +58,21 @@ class SlotsMachineTests: XCTestCase {
         
         // Then
         wait(for: [expectation], timeout: 1)
+        XCTAssertEqual(result, expected)
+        XCTAssertEqual(result2, expected2)
     }
     
     func testButtonTextChanged() {
         // Given
         let expected = "Catch it!"
         let expectation = XCTestExpectation()
+        var result = ""
         
         viewModel
             .$buttonText
             .dropFirst(2)
             .sink { value in
-                XCTAssertEqual(value, expected)
+                result = value
                 expectation.fulfill()
             }
             .store(in: &cancellables)
@@ -77,18 +82,20 @@ class SlotsMachineTests: XCTestCase {
         
         // Then
         wait(for: [expectation], timeout: 1)
+        XCTAssertEqual(result, expected)
     }
     
     func testWin() {
         // Given
         let expected = "You won!"
         let expectation = XCTestExpectation()
+        var result = ""
         
         viewModel
             .$textTitle
             .dropFirst()
             .sink { value in
-                XCTAssertEqual(value, expected)
+                result = value
                 expectation.fulfill()
             }
             .store(in: &cancellables)
@@ -103,18 +110,20 @@ class SlotsMachineTests: XCTestCase {
         
         // Then
         wait(for: [expectation], timeout: 1)
+        XCTAssertEqual(result, expected)
     }
 
-    func testLoose() {
+    func testLoss() {
         // Given
         let expected = "You lose!"
         let expectation = XCTestExpectation()
+        var result = ""
         
         viewModel
             .$textTitle
             .dropFirst()
             .sink { value in
-                XCTAssertEqual(value, expected)
+                result = value
                 expectation.fulfill()
             }
             .store(in: &cancellables)
@@ -129,5 +138,6 @@ class SlotsMachineTests: XCTestCase {
         
         // Then
         wait(for: [expectation], timeout: 1)
+        XCTAssertEqual(result, expected)
     }
 }
