@@ -10,11 +10,13 @@ import SwiftUI
 enum Tabs: String {
     case SkyInfo = "Sky Info"
     case SlotsMachine = "Slots Machine"
+    case TestView = "Test View"
 }
 
 enum Icon: String {
     case SkyInfo = "moon.stars.fill"
     case SlotsMachine = "gamecontroller.fill"
+    case TestView = "infinity"
 }
 
 struct MainView: View {
@@ -42,6 +44,16 @@ struct MainView: View {
                       systemImage: Icon.SlotsMachine.rawValue)
             }
             .tag(Tabs.SlotsMachine)
+            
+            NavigationView {
+                TestPreferenceKeyView()
+//                CheckScrollViewSize()
+            }
+            .tabItem {
+                Label(Tabs.TestView.rawValue,
+                      systemImage: Icon.TestView.rawValue)
+            }
+            .tag(Tabs.TestView)
         }
         .navigationTitle(selectedTab.rawValue)
         .navigationBarBackButtonHidden(true)

@@ -22,6 +22,8 @@
 		FE2BEBA62865E73A007E9CA0 /* SkyInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE2BEBA52865E73A007E9CA0 /* SkyInfoView.swift */; };
 		FE2BEBA82865F0E2007E9CA0 /* SkyInfoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE2BEBA72865F0E2007E9CA0 /* SkyInfoCell.swift */; };
 		FE2BEBAB2865F10D007E9CA0 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = FE2BEBAA2865F10D007E9CA0 /* Kingfisher */; };
+		FE2C1129287CB0CF009E863D /* TestPreferenceKeyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE2C1128287CB0CF009E863D /* TestPreferenceKeyView.swift */; };
+		FE2C112B287CC53A009E863D /* CheckBottomOfScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE2C112A287CC53A009E863D /* CheckBottomOfScrollView.swift */; };
 		FE52209B2867120C00D02205 /* DetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE52209A2867120C00D02205 /* DetailView.swift */; };
 		FEB6C48C2866615200481825 /* SkyInfoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEB6C48B2866615200481825 /* SkyInfoModel.swift */; };
 /* End PBXBuildFile section */
@@ -53,6 +55,8 @@
 		FE2BEBA32865DF2D007E9CA0 /* SlotsMachine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SlotsMachine.swift; sourceTree = "<group>"; };
 		FE2BEBA52865E73A007E9CA0 /* SkyInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SkyInfoView.swift; sourceTree = "<group>"; };
 		FE2BEBA72865F0E2007E9CA0 /* SkyInfoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SkyInfoCell.swift; sourceTree = "<group>"; };
+		FE2C1128287CB0CF009E863D /* TestPreferenceKeyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestPreferenceKeyView.swift; sourceTree = "<group>"; };
+		FE2C112A287CC53A009E863D /* CheckBottomOfScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckBottomOfScrollView.swift; sourceTree = "<group>"; };
 		FE52209A2867120C00D02205 /* DetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailView.swift; sourceTree = "<group>"; };
 		FEB6C48B2866615200481825 /* SkyInfoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SkyInfoModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -150,6 +154,8 @@
 				FE2BEB862865DB7F007E9CA0 /* MainView.swift */,
 				FE2BEBA32865DF2D007E9CA0 /* SlotsMachine.swift */,
 				FE52209C286713E700D02205 /* SkyInfo */,
+				FE2C1128287CB0CF009E863D /* TestPreferenceKeyView.swift */,
+				FE2C112A287CC53A009E863D /* CheckBottomOfScrollView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -294,7 +300,9 @@
 				FE2BEB9B2865DC50007E9CA0 /* NEOModels.swift in Sources */,
 				FE2BEBA42865DF2D007E9CA0 /* SlotsMachine.swift in Sources */,
 				FE52209B2867120C00D02205 /* DetailView.swift in Sources */,
+				FE2C112B287CC53A009E863D /* CheckBottomOfScrollView.swift in Sources */,
 				FE2BEB952865DBCC007E9CA0 /* SkyInfoVM.swift in Sources */,
+				FE2C1129287CB0CF009E863D /* TestPreferenceKeyView.swift in Sources */,
 				FE2BEB852865DB7F007E9CA0 /* MainApp.swift in Sources */,
 				FE2BEBA62865E73A007E9CA0 /* SkyInfoView.swift in Sources */,
 				FE2BEB932865DBAF007E9CA0 /* SlotsMachineVM.swift in Sources */,

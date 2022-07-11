@@ -37,6 +37,17 @@ struct SkyInfoView: View {
                             }
                         }
                         SkyInfoCell(skyInfo: info)
+                        // isHidden doesn't depend on image load
+//                            .modifier(CellPreferenceModifier())
+                    }
+                    // isHiddin depend on image load
+                    .modifier(CellPreferenceModifier())
+                }
+                .onPreferenceChange(CellOffsetPreferenceKey.self) { value in
+                    let coefficient = value / geometry.size.height
+                    if coefficient != 0 && coefficient < 1 && isHidden == true {
+                        isHidden.toggle()
+                        print("coef \(coefficient)")
                     }
                 }
                 .alert(item: $viewModel.error) { error in
@@ -48,7 +59,6 @@ struct SkyInfoView: View {
                 .navigationTitle("\(Tabs.SkyInfo.rawValue)")
                 .toolbar {
                     Button("Search") {
-                        print("Search")
                         isHidden.toggle()
                     }
                 }
@@ -93,11 +103,10 @@ struct BottomView: View {
             .padding(.top, 10)
             
             Button("Get sky info") {
-                print("tapped")
                 guard !startDate.isEmpty && !endDate.isEmpty else {return}
-                self.viewModel.fetchSkyInfo(startDate: startDate,
+                viewModel.fetchSkyInfo(startDate: startDate,
                                             endDate: endDate)
-                self.isHidden.toggle()
+                if !isHidden { isHidden.toggle() }
             }
             .buttonStyle(.bordered)
             .background(.green)
